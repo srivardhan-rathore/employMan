@@ -4,7 +4,7 @@ import calendar
 import datetime
 from main.models import Employee, Attendance
 from django.contrib.auth.decorators import login_required
-from .forms import EmployeeForm
+from .forms import EmployeeForm, DepartmentForm
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -34,6 +34,19 @@ def add_employee(request):
         else:
             form = EmployeeForm()
     return render(request, 'main/add_employee.html', {'form': form})
+
+@login_required
+def add_department(request):
+    form = DepartmentForm()
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = DepartmentForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main:home')
+        else:
+            form = DepartmentForm()
+    return render(request, 'main/add_department.html', {'form': form})
 
 
 @login_required
@@ -91,7 +104,7 @@ def get_employee_attendance(request):
             if request.POST.get('username'):
                 username = request.POST.get('username')
                 if username == 'All Employees':
-                    attendance_list = Attendance.objects.filter(date__range=(start, end)).values('employee__employee__first_name').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
+                    attendance_list = Attendance.objects.filter(date__range=(start, end)).values( 'employee__employee__username', 'employee__employee__first_name').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
                     context = {'attendance_list': attendance_list, 'start': start, 'end': end, 'employees': employees}
                     return render(request, 'main/attendance_combined.html', context)
                 else:

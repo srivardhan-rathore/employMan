@@ -112,7 +112,10 @@
                                    <p class="card-subtitle card-subtitle-dash">All Employees</p>
                                   </div>
                                   <div>
+                                      <a href="{% url 'main:add_employee' %}">
+
                                     <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new Employee</button>
+                                      </a>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">
@@ -142,7 +145,7 @@
                                         </td>
                                         <td>
                                           <div class="d-flex ">
-                                            <img src="{% static 'assets/images/faces/face1.jpg' %}" alt="">
+                                            <img src="{% static 'assets/images/faces/profile.png' %}" alt="">
                                             <div>
                                               <h6>{{ emp.employee.first_name }}</h6>
                                               <p>{{ emp.position }}</p>
