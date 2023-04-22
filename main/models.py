@@ -21,6 +21,7 @@ class Department(BaseModel):
 class Employee(BaseModel):
     employee = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, null=True, blank=True)
+    position = models.CharField(max_length=30, default="Staff")
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='employee')
     phone_number = models.CharField(max_length=20)
     salary = models.DecimalField(max_digits=8, decimal_places=2)

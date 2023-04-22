@@ -4,12 +4,36 @@ import calendar
 import datetime
 from main.models import Employee, Attendance
 from django.contrib.auth.decorators import login_required
+from .forms import EmployeeForm
 from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
 def home(request):
-    return render(request, 'main/index.html')
+    employees = Employee.objects.all()
+    context = {'employees': employees}
+    return render(request, 'main/index.html', context)
+
+
+@login_required
+def all_employees(request):
+    employees = Employee.objects.all()
+    context = {'employees': employees}
+    return render(request,'main/all_employees.html', context)
+
+
+@login_required
+def add_employee(request):
+    form = EmployeeForm()
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = EmployeeForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main:home')
+        else:
+            form = EmployeeForm()
+    return render(request, 'main/add_employee.html', {'form': form})
 
 
 @login_required

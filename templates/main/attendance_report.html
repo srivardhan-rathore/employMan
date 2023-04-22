@@ -96,9 +96,6 @@
                       {% endfor %}
                       </tbody>
                     </table>
-                    <div class="col-sm-3">
-                        <button type="submit" class="btn btn-primary" style="color:white">Submit</button>
-                    </div>
                   </div>
                 {% endif %}
                 </div>
@@ -116,5 +113,12 @@
         const today = new Date().toISOString().split("T")[0];
         start.value = today;
         end.value = today;
+        end.min = today;
+
+        start.addEventListener("input", () => {
+            end.min = start.value;
+            const start1 = new Date(start.value);
+            end.valueAsDate = new Date(start1.getTime() + 86400000);
+        });
     </script>
 {% endblock %}
