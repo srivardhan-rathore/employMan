@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
   <!-- end inject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="{% static 'assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
   <link rel="stylesheet" href="{% static 'assets/js/select.dataTables.min.css' %}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
@@ -39,10 +38,11 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="{% url 'main:home' %}">
-            <img src="{% static 'assets/images/logo.svg' %}" alt="logo" />
+{#            <img src="{% static 'assets/images/logo.svg' %}" alt="logo" />#}
+              <h3><b>Narayan<span style="color: coral">Iron</span></b></h3>
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" />
+          <a class="navbar-brand brand-logo-mini" href="{% url 'main:home' %}">
+            <img src="{% static 'assets/images/narayan-logo.png' %}" alt="logo" />
           </a>
         </div>
       </div>
