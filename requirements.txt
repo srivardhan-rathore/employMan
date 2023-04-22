@@ -1,0 +1,10 @@
+django~=4.2
+whitenoise
+django-bootstrap4
+social-auth-app-django
+google-auth
+google-auth-oauthlib
+requests
+django-extensions
+python-decouple
+xhtml2pdf

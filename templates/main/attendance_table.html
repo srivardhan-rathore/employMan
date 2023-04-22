@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Attendance
+{% endblock %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link ps-0" id="home-tab" href="{% url 'main:home' %}" role="tab">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" id="profile-tab" href="{% url 'main:attendance' %}">Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" href="{% url 'main:report' %}">Report</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link border-0" id="more-tab" href="{% url 'main:combined_report' %}" role="tab">Combined Report</a>
+                    </li>
+                  </ul>
+                  <div>
+                    <div class="btn-wrapper">
+                      <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
+                      <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
+                      <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="col-lg-12 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">Take Attendance</h3>
+                  <div class="table-responsive">
+                    <form method="POST" action="{% url 'main:attendance' %}">
+                    {% csrf_token %}
+                    <div class="col-sm-2">
+                        <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
+                          <span class="input-group-addon input-group-prepend border-right">
+                            <span class="icon-calendar input-group-text calendar-icon"></span>
+                          </span>
+                                <input type="date" id="date" name="date" class="form-control" value="{{ date|date:'Y-m-d' }}" required>
+                        </div>
+                    </div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Employee</th>
+                          <th>Name</th>
+                          <th>Department</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for employee in employees %}
+                        <tr>
+                          <td>{{ employee.employee }}</td>
+                          <td>{{ employee.employee.first_name }}</td>
+                          <td>{{ employee.department }}</td>
+                          <td>
+                            <input type="radio" class="btn-check" name="status-{{ employee.slug }}" value="Present" id="present-{{ employee.slug }}" autocomplete="off" >
+                            <label class="btn btn-outline-success" for="present-{{ employee.slug }}">Present</label>
+
+                            <input type="radio" class="btn-check" name="status-{{ employee.slug }}" value="Absent" id="absent-{{ employee.slug }}" autocomplete="off" checked>
+                            <label class="btn btn-outline-danger" for="absent-{{ employee.slug }}">Absent</label>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary" style="color:white">Submit</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let date =document.getElementById("date");
+        const today = new Date().toISOString().split("T")[0];
+        date.value = today;
+    </script>
+{% endblock %}
