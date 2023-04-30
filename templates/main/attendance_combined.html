@@ -91,8 +91,8 @@
                       <tbody>
                       {% for attendance in attendance_list %}
                         <tr>
-                          <td>{{ attendance.employee__employee__username }}</td>
-                          <td>{{ attendance.employee__employee__first_name }}</td>
+                          <td>{{ attendance.employee__employee }}</td>
+                          <td>{{ attendance.employee__employee }}</td>
                           <td style="color: green"><b>{{ attendance.present }}</b></td>
                           <td style="color: red"><b>{{ attendance.absent }}</b></td>
                         </tr>

@@ -103,12 +103,12 @@ def get_employee_attendance(request):
             if request.POST.get('username'):
                 username = request.POST.get('username')
                 if username == 'All Employees':
-                    attendance_list = Attendance.objects.filter(date__range=(start, end)).values( 'employee__employee__username', 'employee__employee__first_name').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
+                    attendance_list = Attendance.objects.filter(date__range=(start, end)).values('employee__employee', 'employee__employee').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
                     context = {'attendance_list': attendance_list, 'start': start, 'end': end, 'employees': employees}
                     return render(request, 'main/attendance_combined.html', context)
                 else:
                     employee = Employee.objects.get(slug=username)
-                    attendance_list = Attendance.objects.filter(employee=employee, date__range=(start, end)).values('employee__employee__first_name').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
+                    attendance_list = Attendance.objects.filter(employee=employee, date__range=(start, end)).values('employee__employee').annotate(present=Count('status', filter=Q(status='Present')), absent=Count('status', filter=Q(status='Absent')))
                     context = {'attendance_list': attendance_list, 'start': start, 'end': end, 'employees': employees}
                     return render(request, 'main/attendance_combined.html', context)
     return render(request, 'main/attendance_combined.html', context)
