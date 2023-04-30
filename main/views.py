@@ -1,17 +1,15 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count, Sum, Q
-import calendar
-import datetime
 from main.models import Employee, Attendance
 from django.contrib.auth.decorators import login_required
 from .forms import EmployeeForm, DepartmentForm
-from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
 def home(request):
     employees = Employee.objects.all()
-    context = {'employees': employees}
+    total_employees = employees.count()
+    context = {'employees': employees, 'total_employees': total_employees}
     return render(request, 'main/index.html', context)
 
 
@@ -34,6 +32,7 @@ def add_employee(request):
         else:
             form = EmployeeForm()
     return render(request, 'main/add_employee.html', {'form': form})
+
 
 @login_required
 def add_department(request):
