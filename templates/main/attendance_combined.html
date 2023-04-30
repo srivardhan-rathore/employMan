@@ -92,16 +92,13 @@
                       {% for attendance in attendance_list %}
                         <tr>
                           <td>{{ attendance.employee__employee }}</td>
-                          <td>{{ attendance.employee__employee }}</td>
+                          <td>{{ attendance.employee__department__department_name }}</td>
                           <td style="color: green"><b>{{ attendance.present }}</b></td>
                           <td style="color: red"><b>{{ attendance.absent }}</b></td>
                         </tr>
                       {% endfor %}
                       </tbody>
                     </table>
-                    <div class="col-sm-3">
-                        <button type="submit" class="btn btn-primary" style="color:white">Submit</button>
-                    </div>
                   </div>
                 {% endif %}
                 </div>

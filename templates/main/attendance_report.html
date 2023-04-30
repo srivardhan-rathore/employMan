@@ -82,7 +82,7 @@
                       <thead>
                         <tr>
                           <th>Employee</th>
-                          <th>Name</th>
+                          <th>Department</th>
                           <th>Date</th>
                           <th>Status</th>
                         </tr>
@@ -91,7 +91,7 @@
                       {% for attendance in attendance_list %}
                         <tr>
                           <td>{{ attendance.employee.employee }}</td>
-                          <td>{{ attendance.employee.employee.first_name }}</td>
+                          <td>{{ attendance.employee.department }}</td>
                           <td>{{ attendance.date }}</td>
                           <td>{{ attendance.status }}</td>
                         </tr>

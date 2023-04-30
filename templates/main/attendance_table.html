@@ -52,7 +52,7 @@
                       <thead>
                         <tr>
                           <th>Employee</th>
-                          <th>Name</th>
+                          <th>Position</th>
                           <th>Department</th>
                           <th>Status</th>
                         </tr>
@@ -61,7 +61,7 @@
                       {% for employee in employees %}
                         <tr>
                           <td>{{ employee.employee }}</td>
-                          <td>{{ employee.employee.first_name }}</td>
+                          <td>{{ employee.position }}</td>
                           <td>{{ employee.department }}</td>
                           <td>
                             <input type="radio" class="btn-check" name="status-{{ employee.slug }}" value="Present" id="present-{{ employee.slug }}" autocomplete="off" >
