@@ -24,7 +24,7 @@ class Employee(BaseModel):
     position = models.CharField(max_length=30, default="Staff")
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='employee')
     phone_number = models.CharField(max_length=20)
-    salary = models.DecimalField(max_digits=8, decimal_places=2)
+    salary_per_day = models.DecimalField(max_digits=8, decimal_places=2)
     hire_date = models.DateField()
     address = models.CharField(max_length=100)
 

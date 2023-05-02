@@ -67,7 +67,7 @@
                     <select class="form-select" name="username" aria-label="Default select example">
                       <option selected>All Employees</option>
                         {% for employee in employees %}
-                            <option value="{{ employee.slug }}">{{ employee.employee.first_name }}</option>
+                            <option value="{{ employee.slug }}">{{ employee.employee }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -86,15 +86,16 @@
                           <th>Name</th>
                           <th style="color: green">Present</th>
                           <th style="color: red">Absent</th>
+                          <th>Salary</th>
                         </tr>
                       </thead>
                       <tbody>
                       {% for attendance in attendance_list %}
-                        <tr>
                           <td>{{ attendance.employee__employee }}</td>
                           <td>{{ attendance.employee__department__department_name }}</td>
                           <td style="color: green"><b>{{ attendance.present }}</b></td>
                           <td style="color: red"><b>{{ attendance.absent }}</b></td>
+                          <td><b>{{ attendance.employee__salary }}</b></td>
                         </tr>
                       {% endfor %}
                       </tbody>

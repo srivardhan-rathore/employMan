@@ -67,7 +67,7 @@
                     <select class="form-select" name="username" aria-label="Default select example">
                       <option selected>All Employees</option>
                         {% for employee in employees %}
-                            <option value="{{ employee.slug }}">{{ employee.employee.first_name }}</option>
+                            <option value="{{ employee.slug }}">{{ employee.employee }}</option>
                         {% endfor %}
                     </select>
                 </div>

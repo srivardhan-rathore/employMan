@@ -1,4 +1,6 @@
 {% extends 'main/base.html' %}
+{% load bootstrap4 %}
+
 
 {% block title %}
     Attendance
@@ -38,6 +40,7 @@
                 <div class="card-body">
                   <h3 class="card-title">Take Attendance</h3>
                   <div class="table-responsive">
+                    {% bootstrap_messages %}
                     <form method="POST" action="{% url 'main:attendance' %}">
                     {% csrf_token %}
                     <div class="col-sm-2">

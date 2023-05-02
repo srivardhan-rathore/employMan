@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit Employee</h4>
+                  <p class="card-description">
+                    Edit
+                  </p>
+                  <form method="post" action="{% url 'main:edit_employee' employee.uid %}" class="forms-sample">
+                      {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+    </div>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load bootstrap4 %}
 {% load static %}
 
 {% block title %}
@@ -49,6 +50,7 @@
                                     <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new Employee</button>
                                   </div>
                                 </div>
+                                {% bootstrap_messages %}
                                 <div class="table-responsive  mt-1">
                                   <table class="table select-table">
                                     <thead>
@@ -66,7 +68,7 @@
                                           <div class="d-flex ">
                                             <img src="{% static 'assets/images/faces/profile.png' %}" alt="">
                                             <div>
-                                              <h6>{{ emp.employee }}</h6>
+                                              <h6><a href="{% url 'main:edit_employee' emp.uid %} ">{{ emp.employee }}</a></h6>
                                               <p>{{ emp.position }}</p>
                                             </div>
                                           </div>
