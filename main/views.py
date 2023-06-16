@@ -59,13 +59,27 @@ def attendance(request):
                 return redirect('main:attendance')
             else:
                 for employee, status in request.POST.items():
-                    print(employee)
-                    print(f"status {status}")
+
                     if employee.startswith('status-'):
                         employee_id = employee[7:]
                         employee = Employee.objects.get(slug=employee_id)
                         new_attendance = Attendance.objects.create(employee=employee, date=date, status=status)
                         new_attendance.save()
+
+                for employee, status in request.POST.items():
+                    if employee.startswith('entry-'):
+                        employee_id = employee[6:]
+                        employee = Employee.objects.get(slug=employee_id)
+                        attendance_obj = Attendance.objects.get(employee=employee, date=date)
+                        attendance_obj.entry_time = status
+                        attendance_obj.save()
+
+                    elif employee.startswith('leave-'):
+                        employee_id = employee[6:]
+                        employee = Employee.objects.get(slug=employee_id)
+                        attendance_obj = Attendance.objects.get(employee=employee, date=date)
+                        attendance_obj.leave_time = status
+                        attendance_obj.save()
 
                 messages.success(request, f"Attendance for {date} added.")
                 return redirect('main:home')

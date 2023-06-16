@@ -39,6 +39,8 @@ class Employee(BaseModel):
 class Attendance(BaseModel):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
+    entry_time = models.TimeField(default="09:00:00")
+    leave_time = models.TimeField(default="17:00:00")
     status = models.CharField(max_length=10, choices=(('Present', 'Present'), ('Absent', 'Absent')))
 
     def __str__(self):
